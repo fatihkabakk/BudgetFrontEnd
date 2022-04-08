@@ -1,12 +1,13 @@
 import './App.css';
-import Nav from './components/nav/Nav';
+import Router from './layouts/ComponentRouter';
+import Nav from './layouts/Nav';
 
 function App() {
 	return (
 		<>
 			<Nav isLogged={false} />
 			<div className='content'>
-				<p>Hello, React!</p>
+				<Router />
 			</div>
 		</>
 	);
