@@ -1,3 +1,10 @@
+:root {
+    --clr-green: rgb(162, 255, 198);
+    --clr-purple: rgb(120, 0, 220);
+    --clr-white: rgb(255, 255, 255);
+    --clr-black: rgb(0, 0, 0);
+}
+
 * {
     margin: 0;
     padding: 0;
