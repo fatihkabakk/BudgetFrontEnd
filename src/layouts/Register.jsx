@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import AuthService from '../services/authService';
 import './styles/LoginRegister.css';
 
-export default function Login() {
+export default function Register() {
 	let [username, setUsername] = useState('');
 	let [password, setPassword] = useState('');
 	let [usernameError, setUsernameError] = useState('');
@@ -25,7 +25,7 @@ export default function Login() {
 			return;
 		}
 		let id = toast.loading('Signing in...', { autoClose: 2000 });
-		const response = authService.login(username, password);
+		const response = authService.register(username, password);
 		response
 			.then(({ data }) => {
 				return new Promise((resolve, reject) => {
@@ -33,13 +33,12 @@ export default function Login() {
 						reject(data);
 					} else {
 						toast.update(id, {
-							render: 'Signed in, redirecting...',
+							render: 'Signed up, redirecting...',
 							type: 'success',
 							isLoading: false,
 							autoClose: 1000,
 						});
-						localStorage.setItem('token', data.data.token);
-						navigate('/');
+						navigate('/login');
 						resolve(data);
 					}
 				});
@@ -92,7 +91,7 @@ export default function Login() {
 	return (
 		<div className='mx-auto'>
 			<form>
-				<h3>Sign In</h3>
+				<h3>Sign Up</h3>
 				<div className='form-group'>
 					<label>Username</label>
 					<input
@@ -121,18 +120,6 @@ export default function Login() {
 					/>
 					{passwordError && <span className='error'>{passwordError}</span>}
 				</div>
-				<div className='form-group'>
-					<div className='custom-control custom-checkbox'>
-						<input
-							type='checkbox'
-							className='custom-control-input'
-							id='customCheck1'
-						/>
-						<label className='custom-control-label' htmlFor='customCheck1'>
-							Remember me
-						</label>
-					</div>
-				</div>
 				<button
 					onClick={handleForm}
 					className={`btn-outline my-2 ${!isValid && 'opacity-50'}`}
@@ -140,7 +127,7 @@ export default function Login() {
 					Submit
 				</button>
 				<p className='mt-2' style={{ fontSize: '.75rem' }}>
-					Don't have an account? <Link to='/register'>Sign Up</Link>
+					Already have an account? <Link to='/login'>Sign In</Link>
 				</p>
 			</form>
 		</div>
