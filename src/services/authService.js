@@ -1,10 +1,12 @@
-import post from 'axios';
+import axios from 'axios';
 
 export default class AuthService {
-	login(username, password) {
+	login(username, password, rememberMe) {
+		rememberMe = rememberMe ? rememberMe : false;
 		return axios.post('http://localhost:5000/login', {
 			username,
 			password,
+			rememberMe,
 		});
 	}
 
